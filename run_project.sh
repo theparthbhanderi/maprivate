@@ -8,4 +8,4 @@ PROJECT_DIR=$(pwd)
 osascript -e "tell application \"Terminal\" to do script \"cd '$PROJECT_DIR/backend' && python3 manage.py runserver\""
 
 # Start Frontend in a new Terminal window
-osascript -e "tell application \"Terminal\" to do script \"cd '$PROJECT_DIR/website' && npm run dev\""
+osascript -e "tell application \"Terminal\" to do script \"cd '$PROJECT_DIR/apps/website' && npm run dev\""

@@ -11,6 +11,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # Add custom claims
         token['username'] = user.username
         token['email'] = user.email
+        token['is_staff'] = user.is_staff
+        token['is_superuser'] = user.is_superuser
 
         return token
 
@@ -54,9 +56,18 @@ class ImageProjectSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = ImageProject
-        fields = ('id', 'user', 'original_image', 'processed_image', 'processing_type', 'settings', 'created_at', 'status')
-        read_only_fields = ('processed_image', 'user', 'created_at', 'status')
+        fields = (
+            'id', 'user', 'original_image', 'processed_image', 
+            'processing_type', 'settings', 'created_at', 'status',
+            # AI Generation fields
+            'source', 'prompt', 'gen_style', 'gen_seed', 'gen_steps'
+        )
+        read_only_fields = (
+            'processed_image', 'user', 'created_at', 'status',
+            'gen_seed', 'gen_steps'
+        )
 
     def validate_settings(self, value):
         # Additional custom validation if needed
         return value
+

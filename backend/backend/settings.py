@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-dev-key-chan
 # Default to True for local development convenience during testing
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost 127.0.0.1 .onrender.com .vercel.app').split(' ')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost 127.0.0.1 10.231.42.171 .onrender.com .vercel.app').split(' ')
 
 
 # Application definition
@@ -230,7 +230,30 @@ else:
     # through a custom view since Django's static() only works in DEBUG mode
 
 # CORS Configuration
-CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost:5173 https://fixpix-fronted.vercel.app').split(' ')
+# Standard local development origins + Android emulator IP + Production URLs
+default_cors_origins = [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'http://10.0.2.2:8000', # Android Emulator
+    # Production URLs
+    'https://fixpix-fronted.vercel.app',
+    'https://fixpix-backend.onrender.com',
+    'https://parthbuilds.dev',
+    'https://www.parthbuilds.dev',
+]
+
+CORS_ALLOWED_ORIGINS = os.environ.get(
+    'CORS_ALLOWED_ORIGINS', 
+    ' '.join(default_cors_origins)
+).split(' ')
+
+# Add production URL if defined in environment
+prod_cors = os.environ.get('PRODUCTION_URL')
+if prod_cors:
+    CORS_ALLOWED_ORIGINS.append(prod_cors)
+
 CORS_ALLOW_ALL_ORIGINS = False
 
 # Celery Configuration

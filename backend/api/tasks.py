@@ -228,3 +228,110 @@ def cleanup_old_processed_images(days=7):
         deleted_count += 1
                 
     return f'Cleaned up {deleted_count} old projects'
+
+
+@shared_task(bind=True, max_retries=2, time_limit=600, soft_time_limit=540)
+def generate_image_async(self, project_id, prompt, style='photorealistic', seed=None):
+    """
+    Async task to generate an image using DeepFloyd IF.
+    
+    This task runs on the 'generation' queue which should be handled by
+    GPU-equipped workers. In development/Vercel (no-celery), runs synchronously.
+    
+    Args:
+        project_id: ID of the ImageProject
+        prompt: Text prompt for generation
+        style: One of 'photorealistic', 'artistic', 'anime'
+        seed: Random seed for reproducibility (optional)
+    """
+    from api.models import ImageProject
+    from api.deepfloyd_service import DeepFloydService
+    from api.generation_limits import GenerationLimits
+    import time
+    
+    start_time = time.time()
+    
+    try:
+        project = ImageProject.objects.get(id=project_id)
+        project.status = 'processing'
+        project.save()
+        
+        print(f"DeepFloyd Task: Starting generation for project {project_id}")
+        print(f"DeepFloyd Task: Prompt: '{prompt[:50]}...', Style: {style}")
+        
+        # Initialize service and generate
+        service = DeepFloydService()
+        
+        result = service.generate(
+            prompt=prompt,
+            style=style,
+            seed=seed,
+            num_inference_steps=50,
+            guidance_scale=7.5,
+        )
+        
+        # Check for NSFW content
+        if result.get('nsfw_detected', False):
+            project.status = 'failed'
+            project.save()
+            # Don't count failed generations against limit
+            limits = GenerationLimits(project.user)
+            limits.record_generation(
+                gpu_time_seconds=time.time() - start_time,
+                success=False
+            )
+            return {
+                'status': 'error',
+                'message': 'Content policy violation detected. Please try a different prompt.',
+                'project_id': project_id
+            }
+        
+        # Update project with result
+        project.processed_image.name = result['image_path']
+        project.gen_seed = result['seed']
+        project.gen_steps = result['steps']
+        project.status = 'completed'
+        project.save()
+        
+        # Record successful generation
+        gpu_time = time.time() - start_time
+        limits = GenerationLimits(project.user)
+        limits.record_generation(gpu_time_seconds=gpu_time, success=True)
+        
+        print(f"DeepFloyd Task: Completed in {gpu_time:.1f}s")
+        
+        return {
+            'status': 'success',
+            'project_id': project_id,
+            'image_path': result['image_path'],
+            'seed': result['seed'],
+        }
+        
+    except ImageProject.DoesNotExist:
+        print(f"DeepFloyd Task: Project {project_id} not found")
+        return {'status': 'error', 'message': 'Project not found'}
+        
+    except Exception as exc:
+        print(f"DeepFloyd Task: Error - {exc}")
+        
+        # Update project status
+        try:
+            project = ImageProject.objects.get(id=project_id)
+            project.status = 'failed'
+            project.save()
+            
+            # Record failed generation (don't count against limit)
+            limits = GenerationLimits(project.user)
+            limits.record_generation(
+                gpu_time_seconds=time.time() - start_time,
+                success=False
+            )
+        except:
+            pass
+        
+        # Retry on transient errors
+        if self.request.retries < self.max_retries:
+            raise self.retry(exc=exc, countdown=30)
+        
+        raise exc
+

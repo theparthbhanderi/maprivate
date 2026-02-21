@@ -1,0 +1,252 @@
+package com.fixpix.android.ui.screens
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideInVertically
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.fixpix.android.navigation.Screen
+import com.fixpix.android.ui.components.FixPixButton
+import com.fixpix.android.ui.components.ButtonVariant
+import com.fixpix.android.ui.components.auth.AuthInputField
+import com.fixpix.android.ui.theme.FixPixTheme
+import com.fixpix.android.ui.viewmodel.AuthViewModel
+import kotlinx.coroutines.delay
+
+/**
+ * LoginScreen - Matches FixPix website mobile auth
+ * 
+ * Features:
+ * - Radial gradient background
+ * - Centered auth form
+ * - iOS-style inputs
+ * - Loading + error states
+ * - Skip button for demo
+ */
+@Composable
+fun LoginScreen(
+    navController: NavController,
+    viewModel: AuthViewModel = hiltViewModel()
+) {
+    var username by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var isLoading by remember { mutableStateOf(false) }
+    var error by remember { mutableStateOf<String?>(null) }
+    var showContent by remember { mutableStateOf(false) }
+    
+    // Entry animation
+    LaunchedEffect(Unit) {
+        delay(100)
+        showContent = true
+    }
+    
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(FixPixTheme.colors.background)
+            .background(
+                Brush.radialGradient(
+                    colors = listOf(
+                        FixPixTheme.colors.primary.copy(alpha = 0.12f),
+                        Color.Transparent
+                    ),
+                    center = Offset(0f, 0f),
+                    radius = 800f
+                )
+            )
+            .imePadding()
+    ) {
+        AnimatedVisibility(
+            visible = showContent,
+            enter = fadeIn(animationSpec = tween(300)) + 
+                    slideInVertically(
+                        animationSpec = tween(300),
+                        initialOffsetY = { it / 4 }
+                    )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Spacer(modifier = Modifier.weight(1f))
+                
+                // Logo & Title
+                Text(
+                    text = "FixPix",
+                    fontSize = 34.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = FixPixTheme.colors.primary,
+                    letterSpacing = (-1).sp
+                )
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                Text(
+                    text = "Welcome back",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = FixPixTheme.colors.textMain
+                )
+                
+                Text(
+                    text = "Sign in to continue restoring memories",
+                    fontSize = 15.sp,
+                    color = FixPixTheme.colors.textSecondary,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+                
+                Spacer(modifier = Modifier.height(40.dp))
+                
+                // Error message
+                if (error != null) {
+                    Text(
+                        text = error!!,
+                        fontSize = 14.sp,
+                        color = FixPixTheme.colors.error,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+                }
+                
+                // Username field
+                AuthInputField(
+                    value = username,
+                    onValueChange = { 
+                        username = it
+                        error = null
+                    },
+                    placeholder = "Username",
+                    leadingIcon = Icons.Outlined.Person,
+                    imeAction = ImeAction.Next
+                )
+                
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                // Password field
+                AuthInputField(
+                    value = password,
+                    onValueChange = { 
+                        password = it
+                        error = null
+                    },
+                    placeholder = "Password",
+                    leadingIcon = Icons.Outlined.Lock,
+                    isPassword = true,
+                    imeAction = ImeAction.Done,
+                    onImeAction = {
+                        // Trigger login
+                    }
+                )
+                
+                Spacer(modifier = Modifier.height(24.dp))
+                
+                // Login button
+                FixPixButton(
+                    onClick = {
+                        if (username.isBlank() || password.isBlank()) {
+                            error = "Please fill in all fields"
+                            return@FixPixButton
+                        }
+                        isLoading = true
+                        error = null
+                        viewModel.login(username, password) { success, errorMsg ->
+                            isLoading = false
+                            if (success) {
+                                navController.navigate(Screen.Dashboard.route) {
+                                    popUpTo(Screen.Login.route) { inclusive = true }
+                                }
+                            } else {
+                                error = errorMsg ?: "Login failed"
+                            }
+                        }
+                    },
+                    text = "Log In",
+                    fullWidth = true,
+                    loading = isLoading
+                )
+                
+                Spacer(modifier = Modifier.height(16.dp))
+                
+                // Register link
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Don't have an account? ",
+                        fontSize = 15.sp,
+                        color = FixPixTheme.colors.textSecondary
+                    )
+                    Text(
+                        text = "Sign up",
+                        fontSize = 15.sp,
+                        color = FixPixTheme.colors.primary,
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier.clickable {
+                            navController.navigate(Screen.Register.route)
+                        }
+                    )
+                }
+                
+                Spacer(modifier = Modifier.weight(1f))
+                
+                // Skip button for testing
+                FixPixButton(
+                    onClick = {
+                        navController.navigate(Screen.Dashboard.route) {
+                            popUpTo(Screen.Login.route) { inclusive = true }
+                        }
+                    },
+                    text = "Skip (Demo Mode)",
+                    variant = ButtonVariant.Gray,
+                    fullWidth = true
+                )
+                
+                Spacer(modifier = Modifier.height(32.dp))
+            }
+        }
+    }
+}

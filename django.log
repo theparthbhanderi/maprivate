@@ -1,0 +1,248 @@
+Watching for file changes with StatReloader
+[24/Jan/2026 12:07:47] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+[24/Jan/2026 12:07:47] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:07:47] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:07:47] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:10:17] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:10:17] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:10:23] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:10:23] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Not Found: /
+[24/Jan/2026 12:10:31] "GET / HTTP/1.1" 404 2474
+Not Found: /favicon.ico
+[24/Jan/2026 12:10:31] "GET /favicon.ico HTTP/1.1" 404 2525
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:11:57] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:11:57] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:12:03] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:12:03] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:12:04] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:12:04] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:19:42] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+[24/Jan/2026 12:19:42] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:19:42] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:19:42] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:19:44] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:19:44] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:19:45] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:19:45] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:19:46] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:19:46] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:19:59] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:19:59] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:20:01] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:20:01] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:20:28] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:20:28] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:21:41] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:21:41] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:23:08] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:23:08] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:23:30] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:23:30] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:25:50] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:25:50] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:30:57] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:30:57] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:30:57] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:31:11] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:31:11] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:31:14] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:31:14] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:31:18] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:31:18] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:31:20] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:31:20] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:31:26] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:31:26] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:31:28] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:31:28] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:31:37] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:31:37] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:32:05] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:32:05] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:32:06] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:32:06] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:32:25] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:32:25] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:33:22] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:33:22] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:40:28] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:40:28] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:40:37] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:40:37] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:41:00] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:41:00] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:41:00] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:41:00] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:41:14] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:41:14] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:49:23] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:49:23] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:50:09] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:50:09] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:50:22] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:50:22] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:50:34] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:50:34] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:59:19] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+[24/Jan/2026 12:59:19] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 12:59:19] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 12:59:19] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:07:37] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:07:37] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:09:07] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:09:07] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:09:15] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:09:15] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:13:34] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+[24/Jan/2026 13:13:34] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:13:34] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:13:34] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:21:17] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:21:17] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:21:33] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:21:33] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:38:30] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+[24/Jan/2026 13:38:30] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:38:30] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:38:30] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:38:44] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:38:44] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:39:25] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:39:25] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:42:21] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:42:21] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:42:51] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:42:51] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:51:37] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+[24/Jan/2026 13:51:37] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:51:37] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:51:37] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:54:20] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:54:20] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:54:20] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:54:20] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:57:33] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:57:39] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:57:39] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:57:40] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 13:57:46] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 13:57:46] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 14:06:56] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+[24/Jan/2026 14:06:56] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+Unauthorized: /api/images/generation_status/
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 14:06:56] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 14:06:56] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 14:31:49] "OPTIONS /api/images/generation_status/ HTTP/1.1" 200 0
+Unauthorized: /api/images/generation_status/
+[24/Jan/2026 14:31:49] "GET /api/images/generation_status/ HTTP/1.1" 401 172
+[24/Jan/2026 15:39:47] "OPTIONS /api/token/ HTTP/1.1" 200 0

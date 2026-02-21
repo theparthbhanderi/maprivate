@@ -181,3 +181,108 @@ class ImageViewSet(viewsets.ModelViewSet):
         except Exception as e:
             print(f"Export Error: {e}")
             return Response({'error': 'Error generating export'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @action(detail=False, methods=['post'])
+    def generate(self, request):
+        """
+        Generate an image from a text prompt using DeepFloyd IF.
+        
+        Request Body:
+        - prompt: str (required) - Text description of image to generate
+        - style: str (optional) - 'photorealistic', 'artistic', or 'anime' (default: photorealistic)
+        - seed: int (optional) - Random seed for reproducibility
+        
+        Returns 202 Accepted with project_id for polling.
+        """
+        from .generation_limits import GenerationLimits
+        
+        # Extract parameters
+        prompt = request.data.get('prompt', '').strip()
+        style = request.data.get('style', 'photorealistic')
+        seed = request.data.get('seed')
+        
+        # Validate seed if provided
+        if seed is not None:
+            try:
+                seed = int(seed)
+            except (ValueError, TypeError):
+                seed = None
+        
+        # Check rate limits
+        limits = GenerationLimits(request.user)
+        limit_check = limits.can_generate()
+        
+        if not limit_check['allowed']:
+            return Response({
+                'error': limit_check['reason'],
+                'remaining': limit_check['remaining'],
+                'daily_limit': limit_check['daily_limit'],
+            }, status=status.HTTP_429_TOO_MANY_REQUESTS)
+        
+        # Validate prompt
+        prompt_check = limits.validate_prompt(prompt)
+        if not prompt_check['valid']:
+            return Response({
+                'error': prompt_check['error'],
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        sanitized_prompt = prompt_check['sanitized']
+        
+        # Validate style
+        valid_styles = ['photorealistic', 'artistic', 'anime']
+        if style not in valid_styles:
+            style = 'photorealistic'
+        
+        # Create project with source='generated'
+        project = ImageProject.objects.create(
+            user=request.user,
+            source='generated',
+            prompt=sanitized_prompt,
+            gen_style=style,
+            gen_seed=seed,
+            status='pending',
+            processing_type='restore',  # Required field, but not used for generation
+        )
+        
+        # Increment concurrent count
+        limits.increment_concurrent()
+        
+        # Dispatch async generation task
+        try:
+            from .tasks import generate_image_async
+            task = generate_image_async.delay(
+                str(project.id),
+                sanitized_prompt,
+                style,
+                seed
+            )
+        except Exception as e:
+            print(f"Celery Error (generation): {e}")
+            limits.decrement_concurrent()
+            project.status = 'failed'
+            project.save()
+            return Response({
+                'error': 'Generation service is currently unavailable. Please try again later.',
+                'detail': str(e)
+            }, status=status.HTTP_503_SERVICE_UNAVAILABLE)
+        
+        return Response({
+            'status': 'accepted',
+            'project_id': str(project.id),
+            'task_id': task.id,
+            'message': 'Image generation started. This may take 2-3 minutes.',
+            'remaining': limit_check['remaining'] - 1,
+        }, status=status.HTTP_202_ACCEPTED)
+
+    @action(detail=False, methods=['get'])
+    def generation_status(self, request):
+        """
+        Get user's generation limit status.
+        
+        Returns current usage, limits, and tier info.
+        """
+        from .generation_limits import GenerationLimits
+        
+        limits = GenerationLimits(request.user)
+        return Response(limits.get_status())
+

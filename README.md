@@ -1,85 +1,43 @@
-# FixPix
+# FixPix — Mobile & Web AI Editor
 
-AI-powered image enhancement platform with professional-grade tools for upscaling, noise reduction, and intelligent restoration.
+A professional, full-stack AI photo restoration platform featuring a modern React frontend, native Android application, and a shared Django AI backend.
 
-## 🏗️ Project Structure
+## 📂 Repository Structure
 
-```
-/FixPix
-├── website/          # React/Vite frontend
-│   ├── src/          # Components, pages, hooks
-│   ├── public/       # Static assets
-│   └── package.json
-│
-├── backend/          # Django REST API + AI Engine
-│   ├── api/          # REST endpoints, AI processing
-│   ├── backend/      # Django settings
-│   └── requirements.txt
-│
-├── docker-compose.yml
-└── run_project.sh
-```
+| Path | Description |
+| :--- | :--- |
+| **`apps/android`** | **Native Android App** (Kotlin, Jetpack Compose, Hilt, Retrofit). Open via Android Studio. |
+| **`apps/website`** | **Web Application** (React, Vite, TailwindCSS). The production-grade editor interface. |
+| **`backend`** | **Unified API Service** (Django REST Framework). Powers both Android and Web clients. |
+| **`infra`** | **Infrastructure** (Docker, environment configs). |
+| **`scripts`** | **Automation** (One-click startup scripts). |
+| **`docs`** | **Documentation** (Architecture, Setup Guides, API Specs). |
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### 1. Prerequisites
+- Python 3.10+
 - Node.js 18+
-- Python 3.11+
-- (Optional) Docker & Docker Compose
+- Android Studio (for mobile dev)
 
-### Development Setup
-
-**1. Start Backend:**
+### 2. Run Everything
+Start the Backend and Website simultaneously:
 ```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
+./scripts/run_all.sh
 ```
+- **Web**: [http://localhost:5173](http://localhost:5173)
+- **API**: [http://localhost:8000](http://localhost:8000)
 
-**2. Start Website:**
-```bash
-cd website
-npm install
-npm run dev
-```
+### 3. Native Android Development
+Refer to [docs/android_setup.md](docs/android_setup.md) for detailed instructions.
+**tl;dr**: Open `apps/android` in Android Studio and run the `app` configuration on an emulator.
 
-**3. Or use the convenience script:**
-```bash
-./run_project.sh  # macOS/Linux
-run_project.bat   # Windows
-```
+## 🛠 Tech Stack
+- **Mobile**: Android (Kotlin), Jetpack Compose, Coroutines, Coil, Retrofit.
+- **Web**: React, Vite, Framer Motion, TailwindCSS.
+- **Backend**: Django, DRF, OpenCV, PyTorch (AI Logic).
+- **DevOps**: Monorepo orchestration, Docker-ready structure.
 
-### Docker Deployment
-```bash
-docker-compose up --build
-```
-
-## 🔌 API Endpoints
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/register/` | POST | User registration |
-| `/api/token/` | POST | JWT login |
-| `/api/token/refresh/` | POST | Refresh JWT token |
-| `/api/images/` | GET/POST | List/upload images |
-| `/api/images/{id}/process_image/` | POST | AI enhancement |
-| `/api/images/{id}/download/` | GET | Download result |
-
-## 📱 Mobile Integration
-
-Android and iOS apps can connect to the same backend API:
-
-1. Set API base URL to your deployed backend
-2. Use JWT authentication via `/api/token/`
-3. All image processing endpoints are platform-agnostic
-
-## 🔧 Environment Variables
-
-See `.env.example` files in `website/` and `backend/` directories.
-
-## 📄 License
-
-MIT License
+## 📖 Documentation
+- [System Architecture](docs/architecture.md)
+- [API Contract](docs/api_contract.md)
