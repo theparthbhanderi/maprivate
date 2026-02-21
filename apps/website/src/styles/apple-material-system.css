@@ -1,0 +1,862 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   APPLE-GRADE MATERIAL SYSTEM v1.0
+   
+   Architecture Philosophy:
+   - No outer glows (NEVER)
+   - Inner strokes for edge definition
+   - 5-layer shadow science
+   - Physical material depth
+   - Software-grade restraint
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   1. SURFACE TOKEN SYSTEM
+   Hierarchy: Background → Workspace → Panel → Card → Active
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+    /* ─────────────────────────────────────────
+     SURFACE LAYERS - Light Mode (Pearl)
+     ───────────────────────────────────────── */
+    --surface-background: #F5F5F7;
+    --surface-workspace: rgba(255, 255, 255, 0.85);
+    --surface-panel: rgba(252, 252, 254, 0.95);
+    --surface-card: rgba(255, 255, 255, 0.98);
+    --surface-elevated: #FFFFFF;
+    --surface-active: rgba(0, 122, 255, 0.06);
+
+    /* ─────────────────────────────────────────
+     INNER STROKE SYSTEM (Not borders, inner light)
+     ───────────────────────────────────────── */
+    --stroke-subtle: inset 0 0.5px 0 rgba(255, 255, 255, 0.8);
+    --stroke-medium: inset 0 0.5px 0 rgba(255, 255, 255, 1);
+    --stroke-separator: rgba(0, 0, 0, 0.04);
+    --stroke-active: rgba(0, 122, 255, 0.15);
+
+    /* ─────────────────────────────────────────
+     5-LAYER SHADOW SCIENCE
+     Each layer = different blur radius, direction
+     ───────────────────────────────────────── */
+
+    /* Card Resting - Subtle presence */
+    --shadow-card:
+        inset 0 0.5px 0 rgba(255, 255, 255, 0.6),
+        0 0 0 0.5px rgba(0, 0, 0, 0.03),
+        0 0.5px 1px rgba(0, 0, 0, 0.02),
+        0 1px 2px rgba(0, 0, 0, 0.02),
+        0 2px 4px rgba(0, 0, 0, 0.02),
+        0 4px 8px rgba(0, 0, 0, 0.01);
+
+    /* Card Hover - Slight lift */
+    --shadow-card-hover:
+        inset 0 0.5px 0 rgba(255, 255, 255, 0.8),
+        0 0 0 0.5px rgba(0, 0, 0, 0.04),
+        0 1px 2px rgba(0, 0, 0, 0.03),
+        0 2px 4px rgba(0, 0, 0, 0.03),
+        0 4px 8px rgba(0, 0, 0, 0.03),
+        0 8px 16px rgba(0, 0, 0, 0.02);
+
+    /* Card Active - Inner stroke, slight depression */
+    --shadow-card-active:
+        inset 0 0.5px 0 rgba(0, 122, 255, 0.1),
+        inset 0 0 0 1px rgba(0, 122, 255, 0.12),
+        0 0 0 0.5px rgba(0, 0, 0, 0.02),
+        0 1px 2px rgba(0, 0, 0, 0.02),
+        0 2px 4px rgba(0, 0, 0, 0.02);
+
+    /* Panel - Medium elevation */
+    --shadow-panel:
+        inset 0 0.5px 0 rgba(255, 255, 255, 0.9),
+        0 0 0 0.5px rgba(0, 0, 0, 0.02),
+        0 1px 2px rgba(0, 0, 0, 0.015),
+        0 2px 4px rgba(0, 0, 0, 0.015),
+        0 4px 8px rgba(0, 0, 0, 0.02),
+        0 8px 16px rgba(0, 0, 0, 0.02),
+        0 16px 32px rgba(0, 0, 0, 0.015);
+
+    /* Sheet - High elevation */
+    --shadow-sheet:
+        inset 0 0.5px 0 rgba(255, 255, 255, 1),
+        0 0 0 0.5px rgba(0, 0, 0, 0.03),
+        0 1px 2px rgba(0, 0, 0, 0.02),
+        0 4px 8px rgba(0, 0, 0, 0.03),
+        0 8px 16px rgba(0, 0, 0, 0.04),
+        0 16px 32px rgba(0, 0, 0, 0.04),
+        0 32px 64px rgba(0, 0, 0, 0.03);
+
+    /* ─────────────────────────────────────────
+     MATERIAL BLUR SYSTEM
+     ───────────────────────────────────────── */
+    --material-panel: blur(40px) saturate(180%) brightness(1.02);
+    --material-sheet: blur(60px) saturate(200%) brightness(1.05);
+    --material-card: blur(20px) saturate(150%);
+    --material-toolbar: blur(50px) saturate(180%);
+
+    /* ─────────────────────────────────────────
+     TYPOGRAPHY TRACKING (SF Pro equivalent)
+     ───────────────────────────────────────── */
+    --tracking-tight: -0.4px;
+    --tracking-normal: -0.2px;
+    --tracking-wide: 0.2px;
+    --tracking-caps: 0.5px;
+
+    /* ─────────────────────────────────────────
+     8px GRID SPACING
+     ───────────────────────────────────────── */
+    --grid-1: 4px;
+    --grid-2: 8px;
+    --grid-3: 12px;
+    --grid-4: 16px;
+    --grid-5: 20px;
+    --grid-6: 24px;
+    --grid-8: 32px;
+    --grid-10: 40px;
+    --grid-12: 48px;
+
+    /* ─────────────────────────────────────────
+     SQUIRCLE RADIUS (Continuous curves)
+     ───────────────────────────────────────── */
+    --squircle-s: 8px;
+    --squircle-m: 12px;
+    --squircle-l: 16px;
+    --squircle-xl: 22px;
+    --squircle-2xl: 28px;
+
+    /* ─────────────────────────────────────────
+     MOTION TOKENS
+     ───────────────────────────────────────── */
+    --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    --duration-fast: 100ms;
+    --duration-normal: 150ms;
+    --duration-slow: 200ms;
+
+    /* ─────────────────────────────────────────
+     ACCENT (Used SPARINGLY)
+     ───────────────────────────────────────── */
+    --accent: #007AFF;
+    --accent-secondary: rgba(0, 122, 255, 0.08);
+    --accent-stroke: rgba(0, 122, 255, 0.12);
+
+    /* ─────────────────────────────────────────
+     FILL COLORS (For inputs, not borders)
+     ───────────────────────────────────────── */
+    --fill-primary: rgba(120, 120, 128, 0.16);
+    --fill-secondary: rgba(120, 120, 128, 0.08);
+    --fill-tertiary: rgba(120, 120, 128, 0.04);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DARK MODE - Graphite Cinematic
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.dark {
+    /* Surface Layers - Charcoal (NOT pure black) */
+    --surface-background: #0E0F11;
+    --surface-workspace: rgba(22, 23, 26, 0.95);
+    --surface-panel: rgba(28, 29, 33, 0.95);
+    --surface-card: rgba(31, 32, 36, 0.95);
+    --surface-elevated: rgba(42, 43, 48, 0.98);
+    --surface-active: rgba(10, 132, 255, 0.12);
+
+    /* Inner Strokes - Subtle light edges */
+    --stroke-subtle: inset 0 0.5px 0 rgba(255, 255, 255, 0.04);
+    --stroke-medium: inset 0 0.5px 0 rgba(255, 255, 255, 0.06);
+    --stroke-separator: rgba(255, 255, 255, 0.06);
+    --stroke-active: rgba(10, 132, 255, 0.25);
+
+    /* 5-Layer Shadows - Deeper for dark mode */
+    --shadow-card:
+        inset 0 0.5px 0 rgba(255, 255, 255, 0.04),
+        0 0 0 0.5px rgba(0, 0, 0, 0.5),
+        0 1px 2px rgba(0, 0, 0, 0.15),
+        0 2px 4px rgba(0, 0, 0, 0.12),
+        0 4px 8px rgba(0, 0, 0, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.08);
+
+    --shadow-card-hover:
+        inset 0 0.5px 0 rgba(255, 255, 255, 0.06),
+        0 0 0 0.5px rgba(0, 0, 0, 0.6),
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        0 4px 8px rgba(0, 0, 0, 0.18),
+        0 8px 16px rgba(0, 0, 0, 0.15),
+        0 16px 32px rgba(0, 0, 0, 0.1);
+
+    --shadow-card-active:
+        inset 0 0.5px 0 rgba(10, 132, 255, 0.15),
+        inset 0 0 0 1px rgba(10, 132, 255, 0.2),
+        0 0 0 0.5px rgba(0, 0, 0, 0.4),
+        0 1px 2px rgba(0, 0, 0, 0.1),
+        0 2px 4px rgba(0, 0, 0, 0.08);
+
+    --shadow-panel:
+        inset 0 0.5px 0 rgba(255, 255, 255, 0.05),
+        0 0 0 0.5px rgba(0, 0, 0, 0.6),
+        0 2px 4px rgba(0, 0, 0, 0.15),
+        0 4px 8px rgba(0, 0, 0, 0.15),
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        0 16px 32px rgba(0, 0, 0, 0.2),
+        0 32px 64px rgba(0, 0, 0, 0.15);
+
+    --shadow-sheet:
+        inset 0 0.5px 0 rgba(255, 255, 255, 0.06),
+        0 0 0 0.5px rgba(0, 0, 0, 0.7),
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        0 8px 16px rgba(0, 0, 0, 0.25),
+        0 16px 32px rgba(0, 0, 0, 0.25),
+        0 32px 64px rgba(0, 0, 0, 0.2),
+        0 64px 128px rgba(0, 0, 0, 0.15);
+
+    /* Materials - Darker, more saturated */
+    --material-panel: blur(40px) saturate(200%) brightness(0.98);
+    --material-sheet: blur(60px) saturate(220%) brightness(0.95);
+
+    /* Accent - Dark mode blue */
+    --accent: #0A84FF;
+    --accent-secondary: rgba(10, 132, 255, 0.15);
+    --accent-stroke: rgba(10, 132, 255, 0.25);
+
+    /* Fills */
+    --fill-primary: rgba(120, 120, 128, 0.24);
+    --fill-secondary: rgba(120, 120, 128, 0.16);
+    --fill-tertiary: rgba(120, 120, 128, 0.08);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   2. MATERIAL SURFACE CLASSES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Background Layer - Deepest, flat */
+.apple-background {
+    background: var(--surface-background);
+}
+
+/* Workspace - Main content area */
+.apple-workspace {
+    background: var(--surface-workspace);
+    backdrop-filter: var(--material-panel);
+    -webkit-backdrop-filter: var(--material-panel);
+}
+
+/* Panel - Sidebar, inspector */
+.apple-panel {
+    background: var(--surface-panel);
+    backdrop-filter: var(--material-panel);
+    -webkit-backdrop-filter: var(--material-panel);
+    box-shadow: var(--shadow-panel);
+    isolation: isolate;
+}
+
+/* Card - Tool items, list elements */
+.apple-card {
+    background: var(--surface-card);
+    box-shadow: var(--shadow-card);
+    border-radius: var(--squircle-m);
+    transition:
+        transform var(--duration-fast) var(--ease-out),
+        box-shadow var(--duration-normal) var(--ease-out);
+    will-change: transform;
+}
+
+.apple-card:hover {
+    box-shadow: var(--shadow-card-hover);
+}
+
+.apple-card:active {
+    transform: scale(0.98);
+    box-shadow: var(--shadow-card);
+}
+
+.apple-card-active {
+    background: var(--surface-active);
+    box-shadow: var(--shadow-card-active);
+}
+
+/* Sheet - Bottom sheets, modals */
+.apple-sheet {
+    background: var(--surface-elevated);
+    backdrop-filter: var(--material-sheet);
+    -webkit-backdrop-filter: var(--material-sheet);
+    box-shadow: var(--shadow-sheet);
+    border-radius: var(--squircle-2xl) var(--squircle-2xl) 0 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   3. TYPOGRAPHY SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* SF Pro equivalent tracking */
+.apple-text-hero {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.1;
+}
+
+.apple-text-title {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.3;
+}
+
+.apple-text-headline {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-normal);
+    line-height: 1.4;
+}
+
+.apple-text-body {
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: var(--tracking-normal);
+    line-height: 1.5;
+}
+
+.apple-text-caption {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.1px;
+    line-height: 1.4;
+}
+
+.apple-text-micro {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    line-height: 1.3;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   4. COMPONENT UTILITIES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Separator - Gradient fade at edges */
+.apple-separator {
+    height: 0.5px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--stroke-separator) 8%,
+            var(--stroke-separator) 92%,
+            transparent 100%);
+}
+
+/* Inner stroke effect (applied via pseudo-element) */
+.apple-inner-stroke::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: var(--stroke-subtle);
+    pointer-events: none;
+}
+
+/* Fill for inputs */
+.apple-fill {
+    background: var(--fill-primary);
+    border-radius: var(--squircle-s);
+}
+
+.apple-fill:focus-within {
+    background: var(--fill-secondary);
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+/* Accent color (SPARINGLY) */
+.apple-accent {
+    color: var(--accent);
+}
+
+.apple-accent-bg {
+    background: var(--accent-secondary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   5. INTERACTION PHYSICS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Physical press - scale + shadow reduce */
+.apple-press {
+    transition:
+        transform var(--duration-fast) var(--ease-out),
+        box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.apple-press:active {
+    transform: scale(0.97);
+}
+
+/* Hover intent - subtle lift */
+.apple-hover {
+    transition:
+        transform var(--duration-normal) var(--ease-out),
+        box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.apple-hover:hover {
+    transform: translateY(-1px);
+}
+
+/* Spring motion (CSS approximation) */
+.apple-spring {
+    transition-timing-function: var(--ease-spring);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   6. BUTTON SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Primary Action Button */
+.apple-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--grid-2);
+    padding: var(--grid-3) var(--grid-5);
+    min-height: 44px;
+
+    background: var(--accent);
+    color: white;
+
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-normal);
+
+    border: none;
+    border-radius: var(--squircle-m);
+    cursor: pointer;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 1px 2px rgba(0, 0, 0, 0.1),
+        0 2px 4px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform var(--duration-fast) var(--ease-out),
+        box-shadow var(--duration-fast) var(--ease-out),
+        opacity var(--duration-fast);
+}
+
+.apple-btn-primary:hover {
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 2px 4px rgba(0, 0, 0, 0.12),
+        0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.apple-btn-primary:active {
+    transform: scale(0.97);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.apple-btn-primary:disabled {
+    background: var(--fill-primary);
+    color: rgba(0, 0, 0, 0.3);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.dark .apple-btn-primary:disabled {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Secondary Button - Ghost style */
+.apple-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--grid-2);
+    padding: var(--grid-3) var(--grid-5);
+    min-height: 44px;
+
+    background: var(--fill-secondary);
+    color: var(--accent);
+
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-normal);
+
+    border: none;
+    border-radius: var(--squircle-m);
+    cursor: pointer;
+
+    transition:
+        transform var(--duration-fast) var(--ease-out),
+        background var(--duration-fast);
+}
+
+.apple-btn-secondary:hover {
+    background: var(--fill-primary);
+}
+
+.apple-btn-secondary:active {
+    transform: scale(0.97);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════════════════════
+   7. SLIDER SYSTEM - Professional Grade
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.apple-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    /* Track thickness */
+    background: var(--fill-secondary);
+    border-radius: 9999px;
+    outline: none;
+    cursor: pointer;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: background var(--duration-normal);
+}
+
+.apple-slider:hover {
+    background: var(--fill-primary);
+}
+
+.dark .apple-slider {
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.apple-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: white;
+    cursor: grab;
+    border: 0.5px solid rgba(0, 0, 0, 0.04);
+    margin-top: -8px;
+    /* Center thumb on track (6px track vs 22px thumb) */
+
+    /* Physical thumb shadow */
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        0 4px 8px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(0, 0, 0, 0.02);
+
+    transition:
+        transform var(--duration-fast) cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow var(--duration-fast) cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dark .apple-slider::-webkit-slider-thumb {
+    background: #E0E0E0;
+    border: 0.5px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.apple-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.12),
+        0 6px 12px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(0, 0, 0, 0.02);
+}
+
+.apple-slider::-webkit-slider-thumb:active {
+    cursor: grabbing;
+    transform: scale(1.05);
+    background: var(--accent);
+    /* Accent color on active drag */
+    box-shadow:
+        0 0 0 4px var(--accent-secondary),
+        0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Firefox support */
+.apple-slider::-moz-range-track {
+    height: 6px;
+    background: var(--fill-secondary);
+    border-radius: 9999px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.apple-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: white;
+    border: 0.5px solid rgba(0, 0, 0, 0.04);
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   8. BADGE SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.apple-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 6px;
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+
+    background: var(--fill-tertiary);
+    color: rgba(0, 0, 0, 0.45);
+    border-radius: 4px;
+}
+
+.dark .apple-badge {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.apple-badge-accent {
+    background: var(--accent-secondary);
+    color: var(--accent);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   9. ICON CONTAINER
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.apple-icon-container {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--squircle-m);
+    background: var(--fill-tertiary);
+    flex-shrink: 0;
+}
+
+.apple-icon-container-active {
+    background: var(--accent);
+    color: white;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 2px 4px rgba(0, 122, 255, 0.2),
+        0 4px 8px rgba(0, 122, 255, 0.15);
+}
+
+.dark .apple-icon-container-active {
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 2px 4px rgba(10, 132, 255, 0.3),
+        0 4px 8px rgba(10, 132, 255, 0.2);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   10. GENERATE BUTTON - Primary CTA
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.apple-generate-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--grid-2);
+    padding: var(--grid-4) var(--grid-6);
+    min-height: 52px;
+
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-normal);
+
+    border: none;
+    border-radius: var(--squircle-l);
+    cursor: pointer;
+
+    transition:
+        transform var(--duration-fast) var(--ease-out),
+        box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.apple-generate-btn-active {
+    background: var(--accent);
+    color: white;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 2px 4px rgba(0, 122, 255, 0.15),
+        0 4px 8px rgba(0, 122, 255, 0.12),
+        0 8px 16px rgba(0, 122, 255, 0.08);
+}
+
+.apple-generate-btn-active:hover {
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 2px 4px rgba(0, 122, 255, 0.18),
+        0 6px 12px rgba(0, 122, 255, 0.15),
+        0 12px 24px rgba(0, 122, 255, 0.1);
+}
+
+.apple-generate-btn-active:active {
+    transform: scale(0.98);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 1px 2px rgba(0, 122, 255, 0.1);
+}
+
+.apple-generate-btn-disabled {
+    background: var(--fill-secondary);
+    color: rgba(0, 0, 0, 0.3);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.dark .apple-generate-btn-disabled {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   11. MOBILE BOTTOM DOCK
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.apple-dock {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    background: var(--surface-panel);
+    backdrop-filter: var(--material-toolbar);
+    -webkit-backdrop-filter: var(--material-toolbar);
+
+    padding: var(--grid-2) var(--grid-4);
+    padding-bottom: calc(var(--grid-2) + env(safe-area-inset-bottom, 0px));
+
+    border-top: 0.5px solid var(--stroke-separator);
+
+    box-shadow:
+        inset 0 0.5px 0 rgba(255, 255, 255, 0.6),
+        0 -1px 2px rgba(0, 0, 0, 0.02),
+        0 -4px 8px rgba(0, 0, 0, 0.03),
+        0 -8px 16px rgba(0, 0, 0, 0.02);
+}
+
+.dark .apple-dock {
+    box-shadow:
+        inset 0 0.5px 0 rgba(255, 255, 255, 0.05),
+        0 -1px 2px rgba(0, 0, 0, 0.15),
+        0 -4px 8px rgba(0, 0, 0, 0.2),
+        0 -8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Dock Tab Button */
+.apple-dock-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: var(--grid-2);
+    min-height: 56px;
+
+    background: transparent;
+    border: none;
+    border-radius: var(--squircle-m);
+    cursor: pointer;
+
+    transition:
+        background var(--duration-fast),
+        transform var(--duration-fast) var(--ease-out);
+}
+
+.apple-dock-tab:active {
+    transform: scale(0.95);
+    background: var(--fill-tertiary);
+}
+
+.apple-dock-tab-active {
+    color: var(--accent);
+}
+
+.apple-dock-tab-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   12. DRAG HANDLE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.apple-drag-handle {
+    width: 36px;
+    height: 5px;
+    margin: var(--grid-2) auto;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 2.5px;
+    transition:
+        width var(--duration-fast),
+        background var(--duration-fast);
+}
+
+.dark .apple-drag-handle {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.apple-drag-handle-active {
+    width: 48px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.dark .apple-drag-handle-active {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   13. EMPTY STATE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.apple-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--grid-12);
+    text-align: center;
+}
+
+.apple-empty-state-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: var(--grid-4);
+    padding: var(--grid-4);
+
+    background: var(--fill-tertiary);
+    border-radius: var(--squircle-xl);
+    color: rgba(0, 0, 0, 0.25);
+}
+
+.dark .apple-empty-state-icon {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.apple-empty-state-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-tight);
+    color: rgba(0, 0, 0, 0.85);
+    margin-bottom: var(--grid-1);
+}
+
+.dark .apple-empty-state-title {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.apple-empty-state-description {
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.dark .apple-empty-state-description {
+    color: rgba(255, 255, 255, 0.5);
+}

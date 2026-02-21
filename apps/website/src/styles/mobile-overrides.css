@@ -1,0 +1,300 @@
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE OVERRIDES — 0–768px only
+   Desktop layout untouched.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── FOUNDATION ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    :root {
+        /* Reduce heavy effects on mobile for perf */
+        --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.10);
+        --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.12);
+        --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .dark {
+        --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.4);
+        --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.5);
+        --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    }
+
+    /* iOS safe area padding */
+    html {
+        padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+
+    /* Touch feedback — global active state */
+    button:active,
+    a:active,
+    [role="button"]:active,
+    label:active {
+        transform: scale(0.97) !important;
+        transition: transform 80ms ease !important;
+    }
+
+    /* Touch targets — handled per-component, not globally,
+       to avoid distorting toggles and small icon buttons */
+
+    /* Prevent text resize on rotate */
+    body {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    /* Smooth scrolling */
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Reduce blur on mobile for perf */
+    .inspector-panel,
+    .floating-command-bar,
+    .zoom-hud {
+        backdrop-filter: blur(16px) saturate(120%) !important;
+        -webkit-backdrop-filter: blur(16px) saturate(120%) !important;
+    }
+
+    /* Reduce theme transition on mobile */
+    *,
+    *::before,
+    *::after {
+        transition-duration: 120ms !important;
+    }
+}
+
+/* ─── MOBILE HEADER — Sticky solid bar ─────────────────────────── */
+@media (max-width: 768px) {
+    .mobile-header-bar {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 40 !important;
+        height: 56px !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        background-color: var(--surface) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1px solid var(--border-subtle) !important;
+        box-shadow: none !important;
+    }
+
+    /* Landing page navbar — proper mobile proportions */
+    .landing-navbar>div {
+        border-radius: 18px !important;
+        padding: 0 16px !important;
+    }
+
+    /* Premium hamburger button — light mode */
+    .mobile-hamburger-btn {
+        background: rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(0, 0, 0, 0.06) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        color: #1C1C1E;
+    }
+
+    .mobile-hamburger-btn:active {
+        background: rgba(0, 0, 0, 0.08) !important;
+    }
+
+    /* Dark mode */
+    .dark .mobile-hamburger-btn {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+        color: #F2F2F7;
+    }
+
+    .dark .mobile-hamburger-btn:active {
+        background: rgba(255, 255, 255, 0.12) !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .landing-navbar>div {
+        padding: 0 24px !important;
+    }
+}
+
+/* ─── SIDEBAR DRAWER ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .mobile-sidebar-drawer {
+        width: 86% !important;
+        max-width: 320px !important;
+        border-radius: 0 20px 20px 0 !important;
+        margin: 0 !important;
+        top: 0 !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        background-color: var(--surface) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25) !important;
+    }
+
+    .mobile-sidebar-overlay {
+        background-color: rgba(0, 0, 0, 0.35) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+}
+
+/* ─── PROJECTS PAGE ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .projects-page-container {
+        padding: 20px 16px 32px !important;
+    }
+
+    .projects-page-header {
+        margin-bottom: 20px !important;
+    }
+
+    .projects-page-header h1 {
+        font-size: 24px !important;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    .projects-filter-bar {
+        margin-bottom: 20px !important;
+        height: 48px !important;
+        border-radius: 16px !important;
+        padding: 0 12px !important;
+    }
+
+    .projects-empty-state {
+        margin-top: 40px !important;
+        padding: 32px 24px !important;
+        border-radius: 22px !important;
+    }
+}
+
+/* ─── SETTINGS PAGE ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .settings-page-container {
+        padding: 20px 16px 32px !important;
+    }
+
+    .settings-page-container h1 {
+        font-size: 24px !important;
+    }
+
+    .settings-card {
+        padding: 18px !important;
+        border-radius: 18px !important;
+    }
+
+    .settings-switch-row {
+        min-height: 56px !important;
+    }
+
+    .settings-profile-card {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 12px !important;
+    }
+}
+
+/* ─── BATCH PAGE ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .batch-page-container {
+        padding: 20px 16px 32px !important;
+    }
+
+    .batch-page-container h1 {
+        font-size: 24px !important;
+    }
+
+    .batch-layout {
+        flex-direction: column !important;
+        gap: 16px !important;
+    }
+
+    .batch-panel {
+        width: 100% !important;
+        min-width: 0 !important;
+        border-radius: 20px !important;
+    }
+
+    .batch-queue {
+        min-height: 240px !important;
+        max-height: 400px !important;
+        overflow-y: auto !important;
+    }
+}
+
+/* ─── EDITOR MOBILE CANVAS ─────────────────────────────────────── */
+@media (max-width: 768px) {
+    .ios-pro-canvas {
+        border-radius: 20px !important;
+        overflow: hidden !important;
+    }
+
+    .canvas-container {
+        border-radius: 16px !important;
+    }
+
+    /* Generate FAB safe area */
+    .mobile-generate-fab {
+        bottom: calc(12px + env(safe-area-inset-bottom, 0)) !important;
+        left: 12px !important;
+        right: 12px !important;
+    }
+
+    /* Tool sheet bottom */
+    .mobile-tool-sheet {
+        border-radius: 24px 24px 0 0 !important;
+        padding-bottom: env(safe-area-inset-bottom, 16px) !important;
+    }
+}
+
+/* ─── TYPOGRAPHY — Mobile scale ────────────────────────────────── */
+@media (max-width: 768px) {
+
+    h1,
+    .ios-large-title {
+        font-size: 24px !important;
+        line-height: 1.2 !important;
+    }
+
+    h2,
+    .ios-title {
+        font-size: 20px !important;
+    }
+
+    h3,
+    .ios-title3 {
+        font-size: 17px !important;
+    }
+
+    p,
+    .ios-body {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .ios-footnote,
+    .ios-caption {
+        font-size: 13px;
+    }
+}
+
+/* ─── CARDS & SURFACES — Mobile radius ─────────────────────────── */
+@media (max-width: 768px) {
+
+    /* No element should touch screen edges */
+    .page-content-padded {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    /* Consistent card radius */
+    .floating-card,
+    .project-card,
+    .settings-card,
+    .batch-card {
+        border-radius: 20px !important;
+    }
+}
