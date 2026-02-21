@@ -27,3 +27,4 @@ aiofiles==23.2.1
 uuid
 Pillow
 xgboost
+replicate

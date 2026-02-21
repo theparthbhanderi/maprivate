@@ -73,7 +73,34 @@ class ImageService:
         h, w = img.shape[:2]
         orig_res = f"{w}x{h}"
         
-        # Use Controller
+        # Check if using Replicate via API Token
+        from app.core.config import settings
+        if settings.REPLICATE_API_TOKEN:
+            from app.services.replicate_service import replicate_service
+            
+            # Re-encode the resized image to send it
+            resized_bytes = ImageService.encode_image(img, format=".jpg")
+            
+            # Send to replicate
+            output_bytes = replicate_service.upscale_image(resized_bytes, scale)
+            
+            # Load the result to find its new resolution
+            output_img = ImageService.decode_image(output_bytes)
+            h_new, w_new = output_img.shape[:2]
+            new_res = f"{w_new}x{h_new}"
+            
+            # We must return base64 encoded bytes in "image" as png
+            encoded_bytes = ImageService.encode_image(output_img, format=".png")
+            
+            return {
+                "image": encoded_bytes,
+                "scale": scale,
+                "original_resolution": orig_res,
+                "new_resolution": new_res,
+                "mode": "replicate/real-esrgan"
+            }
+
+        # Otherwise use local Controller
         from app.engine.upscaler.sr_controller import sr_controller
         
         # Predict
@@ -89,7 +116,7 @@ class ImageService:
             "scale": scale,
             "original_resolution": orig_res,
             "new_resolution": new_res,
-            "mode": "realesrgan" + ("+face" if enhance_faces else "")
+            "mode": "local/realesrgan" + ("+face" if enhance_faces else "")
         }
 
     @staticmethod
@@ -165,6 +192,8 @@ class ImageService:
         encoded_bytes = ImageService.encode_image(result_img, format=".png")
         from app.engine.device import get_device
         
+        return {
+            "image": encoded_bytes,
             "mode": mode,
             "device": get_device().type
         }

@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     MAX_IMAGE_SIZE_MB: int = 10
     MODEL_CACHE_DIR: str = os.path.join(os.getcwd(), "models")
     
+    # external services
+    REPLICATE_API_TOKEN: str = ""
+    
     # Google Drive File IDs (Public Shareable Links)
     # TODO: User needs to populate these with actual IDs
     MODEL_LINKS: dict = {
